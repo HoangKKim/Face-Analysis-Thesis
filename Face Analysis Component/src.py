@@ -9,7 +9,7 @@ landmark_predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat
 
 # Constants for eye aspect ratio (EAR) and yawning detection
 EYE_AR_THRESH = 0.2  # Threshold for eye blinking
-EYE_AR_CONSEC_FRAMES = 3  # Number of consecutive frames for blinking
+EYE_AR_CONSEC_FRAMES = 5  # Number of consecutive frames for blinking
 YAWN_THRESH = 50  # Threshold for yawning detection
 
 # Function to calculate 3D head pose
@@ -50,9 +50,7 @@ def detect_yawning(mouth):
     return d_mouth > YAWN_THRESH
 
 # Function to detect blinking
-def detect_blinking(eye_points, frame_count):
-    ear = eye_aspect_ratio(eye_points)
-    print(ear)
+def detect_blinking(ear, frame_count):
     if ear < EYE_AR_THRESH:
         frame_count += 1
     else:
@@ -79,12 +77,12 @@ def normalize_landmarks(landmarks):
     return normalized_landmarks
 
 # Main function for facial analysis
-def facial_analysis(frame):
+def facial_analysis(frame, blink_frame_count):
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = face_detector(gray)
     
     for face in faces:
-        # rect = face.rect  # Extract rectangle from CNN detection
+        # rect = face .rect  # Extract rectangle from CNN detection
         # Detect facial landmarks
         landmarks = landmark_predictor(gray, face)
         landmarks = np.array([[p.x, p.y] for p in landmarks.parts()])
@@ -97,8 +95,11 @@ def facial_analysis(frame):
         mouth = landmarks[48:68]
         
         # Detect blinking
-        blink_frame_count = 0  # Define globally
-        blink_frame_count = detect_blinking(left_eye, blink_frame_count)
+
+        ear = eye_aspect_ratio(left_eye)
+        blink_frame_count = detect_blinking(ear, blink_frame_count)
+        print(f'Blink frame count: {blink_frame_count}')
+        cv2.putText(frame, f"Ear: {ear}", (50, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
         #blink_frame_count = detect_blinking(right_eye, blink_frame_count)
 
         # Estimate face orientation (yaw, pitch, roll)
@@ -113,17 +114,22 @@ def facial_analysis(frame):
             cv2.putText(frame, "Yawning", (50, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
         
         if blink_frame_count >= EYE_AR_CONSEC_FRAMES:
-            cv2.putText(frame, "Blinking", (50, 250), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
+            cv2.putText(frame, "Closed eye", (50, 250), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
+        elif blink_frame_count > 0 and blink_frame_count < EYE_AR_CONSEC_FRAMES:
+            cv2.putText(frame, "Blinking eye", (50, 250), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
+            
         
         # Display head pose angles
         cv2.putText(frame, f"Yaw: {yaw:.2f}", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
         cv2.putText(frame, f"Pitch: {pitch:.2f}", (50, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
         cv2.putText(frame, f"Roll: {roll:.2f}", (50, 150), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
 
-    return frame
+    return frame, blink_frame_count
 
 # Main loop for video processing
 def main():
+    blink_frame_count = 0  # Define globally
+
     cap = cv2.VideoCapture(0)  # Use webcam or video file
     while True:
         ret, frame = cap.read()
@@ -131,7 +137,7 @@ def main():
             break
 
         # Perform facial analysis
-        output_frame = facial_analysis(frame)
+        output_frame, blink_frame_count = facial_analysis(frame, blink_frame_count)
 
         # Display the output frame
         cv2.imshow("Facial Analysis", output_frame)
