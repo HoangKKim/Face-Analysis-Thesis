@@ -1,3 +1,6 @@
 matplotlib
 opencv-python
 numpy
+dlib
+face_alignment
+torch
