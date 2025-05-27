@@ -1,0 +1,5 @@
+CONF_THRESHOLD = 0.5
+MAX_AGE = 30
+N_INIT = 3
+CLASS_NAMES = ['face', 'body']
+CLASS_ID = [0, 1]
