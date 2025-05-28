@@ -41,3 +41,12 @@
 2. Run `split_files.py` to split the dataset into folders with names
 3. Run `extract_landmarks.py` to extract landmarks from the images and save features vectors as `.npy` files in the `Data/feature_vectors` directory (already has hari and hieuthuhai's feature vectors)
 4. Run `face_recognition.py` to recognize faces in the images
+
+<!-- Cấu trúc thư mục -->
+- Folder **Data**: 
+    + Folder **feature_vectors**: chứa 2 file là mean_features.npy (chứa mean vector của các dataset - n folder image sẽ có n mean vector đặc trưng) ; labels.txt chứa label (vị trí tương ứng với từng feature trong database)
+    + Còn lại các folder khác không quan trọng
+- Folder **additional_data**: chứa vài cái video và ảnh sử dụng để test các module
+- Các folder **database_x**: chứa các frame được thu thập qua camera ( = collect_data.py); mỗi folder chứa 100 frames
+- Folder **detection**: chứa class Detector (có thể tham khảo cách dùng qua file **detector.py**)
+- Folder **original_src**: chứa các code và model nguyên bản của module Face Recognition (= Ngọc)
