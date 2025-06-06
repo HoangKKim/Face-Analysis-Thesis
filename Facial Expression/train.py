@@ -11,7 +11,7 @@ with open('./data/feature_vectors/labels.txt', 'r') as f:
     
 svm_model = make_pipeline(
     StandardScaler(),
-    SVC(kernel='linear', probability=True)
+    SVC(kernel='rbf', probability=True)
 )
 
 svm_model.fit(x_train, y_train)

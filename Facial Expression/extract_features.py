@@ -16,6 +16,30 @@ def get_distance(p1, p2, vector):
     x2, y2 = vector[p2 * 2], vector[p2 * 2 + 1]
     return euclidean((x1, y1), (x2, y2))
 
+def get_angle(p1, p2, p3, vector):
+    x1, y1 = vector[p1 * 2], vector[p1 * 2 + 1]
+    x2, y2 = vector[p2 * 2], vector[p2 * 2 + 1]
+    x3, y3 = vector[p3 * 2], vector[p3 * 2 + 1]
+
+    a = np.array([x1 - x2, y1 - y2])
+    b = np.array([x3 - x2, y3 - y2])
+    cosine_angle = np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b) + 1e-6)
+    angle = np.arccos(np.clip(cosine_angle, -1.0, 1.0))
+    return angle
+
+def get_aspect_ratio(p1, p2, p3, p4, vector):
+    vertical = get_distance(p2, p3, vector)
+    horizontal = get_distance(p1, p4, vector)
+    return vertical / (horizontal + 1e-6)
+
+def get_centroid_distances(vector):
+    coords = np.array(vector).reshape(68, 2)
+    centroid = np.mean(coords, axis=0)
+    return [euclidean(pt, centroid) for pt in coords]
+
+def get_symmetry_features(vector, pairs):
+    return [abs(vector[p1 * 2] - vector[p2 * 2]) for (p1, p2) in pairs]
+
 def extract_landmarks(image_input):
     os.makedirs(OUTPUT_FOLDER, exist_ok=True)
     all_feature_vectors = []
@@ -72,13 +96,40 @@ def extract_landmarks(image_input):
             get_distance(39, 42, norm),  # open eyes
             get_distance(62, 66, norm),  # open mouth
         ]
+        
+        angles = [
+            get_angle(36, 39, 42, norm),  # around left eye
+            get_angle(45, 42, 39, norm),  # around right eye
+            get_angle(48, 51, 54, norm),  # mouth bottom
+            get_angle(31, 27, 35, norm),  # nose bridge
+        ]
+        
+        eye_ar_left = get_aspect_ratio(36, 37, 41, 39, norm)
+        eye_ar_right = get_aspect_ratio(42, 43, 47, 45, norm)
+        mouth_ar = get_aspect_ratio(48, 51, 57, 54, norm)
+
+        symmetry_pairs = [
+            (36, 45), (37, 44), (38, 43), (39, 42),  # eyes
+            (31, 35), (32, 34),  # nose
+            (48, 54), (49, 53), (50, 52)  # mouth
+        ]
+        symmetry = get_symmetry_features(norm, symmetry_pairs)
+        
+        centroid_distances = get_centroid_distances(norm)
 
         ratio = [
             dists[0] / dists[1],  # eyes to nose
             dists[2] / get_distance(27, 33, norm),  # mouth to nose
         ]
+        
+        coords = np.array(norm).reshape(68, 2)
+        delta_features = []
+        for i in range(67):
+            dx = coords[i+1][0] - coords[i][0]
+            dy = coords[i+1][1] - coords[i][1]
+            delta_features.extend([dx, dy])
 
-        feature_vector = np.array(norm).flatten().tolist() + dists + ratio
+        feature_vector = (np.array(norm).flatten().tolist() + dists + ratio + angles + [eye_ar_left, eye_ar_right, mouth_ar] + symmetry + centroid_distances + delta_features)
         all_feature_vectors.append(feature_vector)
         filenames.append(filename)
 
@@ -105,7 +156,7 @@ if __name__ == '__main__':
         label = os.path.basename(folder)
         all_features.extend(features)
         all_labels.extend([os.path.basename(folder)] * len(features))
-        print(f"Extract mean vector for {folder}")
+        print(f"Extract feature vector for {folder}")
 
     # save database and its id in file (binary or npy)
     np.save(FEATURE_FILE, np.array(all_features))
