@@ -21,7 +21,7 @@ Run `face_recognition.py` to train the FaceNet model using the face embedding ve
 - Show the accuracy of the model on the test set.
 
 ### 4. Visualize the results
-In `face_detection.py`, the results are also visualized by showing a random sample of test images with their predicted labels, expected labels, and the confidence scores of the predictions.
+In `face_recognition.py`, the results are also visualized by showing a random sample of test images with their predicted labels, expected labels, and the confidence scores of the predictions.
 
 ### Notes
 - Make sure the name of the 2 folders train and test in the `raw_data` folder are the same and match the name of the person.
