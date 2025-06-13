@@ -4,14 +4,16 @@ import tensorflow as tf
 from PIL import Image
 from matplotlib import pyplot as plt
 from mtcnn.mtcnn import MTCNN
+import cv2
+import shutil
 
 config_tf = tf.compat.v1.ConfigProto()
 config_tf.gpu_options.allow_growth = True
 session = tf.compat.v1.Session(config=config_tf)
 
 DETECTOR = MTCNN()
-INPUT_FOLDER = './raw_data/train/'
-OUTPUT_FOLDER = './preprocessed_data/'
+INPUT_FOLDER = './test_data/'
+OUTPUT_FOLDER = './preprocessed_data/test'
 
 def extract_face(filename, required_size=(160, 160)):
     image = Image.open(filename)
@@ -19,15 +21,22 @@ def extract_face(filename, required_size=(160, 160)):
     pixels = np.asarray(image)
     results = DETECTOR.detect_faces(pixels)
     
-    x1, y1, width, height = results[0]['box']
+    faces = []
+    labels = []
     
-    x1, y1 = abs(x1), abs(y1)
-    x2, y2 = x1 + width, y1 + height
-    face = pixels[y1:y2, x1:x2]
+    if len(results) == 0:
+        print(f'No face detected in {filename}')
+        return None
     
-    image = Image.fromarray(face)
-    image = image.resize(required_size)
-    faces = np.asarray(image)
+    for face in results:
+        if face['confidence'] < 0.95:
+            continue
+        x, y, width, height = face['box']
+        x, y = abs(x), abs(y)
+        face_crop = pixels[y:y+height, x:x+width]
+        face_pil = Image.fromarray(face_crop)
+        faces.append(face_pil.resize(required_size))
+        
     return faces
 
 def extract_all_faces(input_folder):
@@ -50,14 +59,54 @@ def extract_all_faces(input_folder):
         all_faces.extend(faces)
         all_labels.extend(labels)
     return np.asarray(all_faces), np.asarray(all_labels)
+
+def save_images(images, labels, label_names, output_base_dir):
+    for idx, img in enumerate(images):
+        label = labels[idx]
+        class_name = label_names[label]
+        class_dir = os.path.join(output_base_dir, class_name)
+        os.makedirs(class_dir, exist_ok=True)
+        file_name = f'{class_name}_{idx}.jpg'
+        cv2.imwrite(os.path.join(class_dir, file_name), img)
             
 
 if __name__ == '__main__':
-    trainX, trainY = extract_all_faces(INPUT_FOLDER)
-    print('Extracted faces:', trainX.shape)
-    print('Extracted labels:', trainY.shape)
+    # preprocessed_data = extract_all_faces(INPUT_FOLDER)
+    # faces, labels = preprocessed_data
+    # print(f'Extracted {len(faces)} faces from {len(labels)} labels.')
     
-    testX, testY = extract_all_faces('./raw_data/test')
-    os.makedirs(OUTPUT_FOLDER, exist_ok=True)
-    np.savez_compressed(os.path.join(OUTPUT_FOLDER, 'train_data.npz'), trainX, trainY)
-    np.savez_compressed(os.path.join(OUTPUT_FOLDER, 'test_data.npz'), testX, testY)
+    # labels_map = {
+    #     'Kim': 0,
+    #     'Oanh': 1,
+    #     'Minh': 2,
+    #     'Ngoc': 3,
+    # }
+    
+    # label_names = {v: k for k, v in labels_map.items()}
+    # labels = np.array([labels_map[label] for label in labels])
+    
+    # output_base_dir = OUTPUT_FOLDER
+    
+    # if os.path.exists(output_base_dir):
+    #     shutil.rmtree(output_base_dir)
+        
+    # for names in labels_map.keys():
+    #     os.makedirs(os.path.join(output_base_dir, names), exist_ok=True)
+    
+    # save_images(faces, labels, label_names, output_base_dir)
+    
+    for file in os.listdir(INPUT_FOLDER):
+        if not file.lower().endswith(('.png', '.jpg', '.jpeg')):
+            continue
+        file_path = os.path.join(INPUT_FOLDER, file)
+        faces = extract_face(file_path)
+        if faces is None:
+            continue
+        
+        output_dir = os.path.join(OUTPUT_FOLDER, os.path.splitext(file)[0])
+        os.makedirs(output_dir, exist_ok=True)
+        
+        for idx, face in enumerate(faces[:2]):
+            output_path = os.path.join(output_dir, f'face_{idx}.jpg')
+            face.save(output_path)
+            print(f'Saved face {idx} from {file} to {output_path}')

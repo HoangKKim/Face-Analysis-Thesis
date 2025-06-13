@@ -1,58 +1,49 @@
-from random import choice
-from numpy import load
 from numpy import expand_dims
-from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import Normalizer
-from sklearn.svm import SVC
-from matplotlib import pyplot
-from sklearn.metrics import accuracy_score
+import numpy as np
+import os
 
-data = load('./preprocessed_data/test_data.npz')
-testX_faces = data['arr_0']
+def calc_distance(emb1, emb2):
+    return np.linalg.norm(emb1 - emb2)
+
+def recognize_student(avg_embeddings_path, test_embedding_path):
+    distances = []
     
-train_data = load('./preprocessed_data/train_embeddings.npz')
-trainX, trainY = train_data['arr_0'], train_data['arr_1']
-test_data = load('./preprocessed_data/test_embeddings.npz')
-testX, testY = test_data['arr_0'], test_data['arr_1']
-print('Dataset: train=%d, test=%d' % (trainX.shape[0], testX.shape[0]))
+    test_data = np.load(test_embedding_path)
+    print("Available keys in test_embedding:", test_data.files)
+    
+    # Adjust 'embedding' if your key is different
+    test_embedding = test_data['arr_0']  
+    
+    # Normalize test embedding
+    normalizer = Normalizer(norm='l2')
+    test_embedding = normalizer.transform(test_embedding.reshape(1, -1))
 
-in_encoder = Normalizer(norm='l2')
-trainX = in_encoder.transform(trainX)
-testX = in_encoder.transform(testX)
+    files = os.listdir(avg_embeddings_path)
+    for file in files:
+        if not file.endswith('.npz'):
+            continue
+        
+        full_path = os.path.join(avg_embeddings_path, file)
+        avg_data = np.load(full_path)
+        avg_embedding = avg_data['arr_0']
+        avg_embedding = normalizer.transform(avg_embedding.reshape(1, -1))
+        
+        distance = calc_distance(avg_embedding, test_embedding)
+        distances.append(distance)
 
-all_labels = list(trainY) + list(testY)
-out_encoder = LabelEncoder()
-out_encoder.fit(all_labels)
-trainY = out_encoder.transform(trainY)
-testY = out_encoder.transform(testY)
+    if not distances:
+        print("No valid embeddings found.")
+        return
 
-model = SVC(kernel='linear', probability=True)
-model.fit(trainX, trainY)
+    min_distance = min(distances)
+    matched_index = distances.index(min_distance)
+    matched_student = files[matched_index].replace('_embedding.npz', '')
+    print(f'Matched student: {matched_student} with distance {min_distance}')
 
-yhat_train = model.predict(trainX)
-yhat_test = model.predict(testX)
-
-score_train = accuracy_score(trainY, yhat_train)
-score_test = accuracy_score(testY, yhat_test)
-print('Accuracy: train=%.3f, test=%.3f' % (score_train*100, score_test*100))
-
-selection = choice([i for i in range(testX.shape[0])])
-random_face_pixels = testX_faces[selection]
-random_face_emb = testX[selection]
-random_face_class = testY[selection]
-random_face_name = out_encoder.inverse_transform([random_face_class])
-# prediction for the face
-samples = expand_dims(random_face_emb, axis=0)
-yhat_class = model.predict(samples)
-yhat_prob = model.predict_proba(samples)
-# get name
-class_index = yhat_class[0]
-class_probability = yhat_prob[0,class_index] * 100
-predict_names = out_encoder.inverse_transform(yhat_class)
-print('Predicted: %s (%.3f)' % (predict_names[0], class_probability))
-print('Expected: %s' % random_face_name[0])
-# plot for fun
-pyplot.imshow(random_face_pixels)
-title = '%s (%.3f)' % (predict_names[0], class_probability)
-pyplot.title(title)
-pyplot.show()
+    
+if __name__ == '__main__':
+    avg_embeddings_path = './average_embeddings/'
+    test_embedding_path = './test_embedding.npz'
+    
+    recognize_student(avg_embeddings_path, test_embedding_path)

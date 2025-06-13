@@ -1,45 +1,65 @@
 import numpy as np
 import torch
 from facenet_pytorch import InceptionResnetV1
+import os
+import cv2
 
-TRAIN_DATA = './preprocessed_data/train_data.npz'
-TEST_DATA = './preprocessed_data/test_data.npz'
+DATA_DIR = './preprocessed_data/'
+OUTPUT_DIR = './average_embeddings/'
+
+labels_map = {
+    'Kim': 0,
+    'Oanh': 1,
+    'Minh': 2,
+    'Ngoc': 3,
+}
 
 # Define embedding extractor
-def get_embeddings(model, face_pixels, device):
-    # Normalize to [0, 1]
+def get_embeddings(model, face_pixels):
     face_pixels = face_pixels.astype('float32') / 255.0
-
-    # Convert to torch tensor and reshape: (1, 3, 160, 160)
-    sample = torch.tensor(face_pixels).permute(2, 0, 1).unsqueeze(0).to(device)
-
+    sample = torch.tensor(face_pixels).permute(2, 0, 1).unsqueeze(0)
     with torch.no_grad():
         embedding = model(sample)
-
     return embedding.squeeze(0).cpu().numpy()
 
 if __name__ == '__main__':
-    # Load data
-    train_data = np.load(TRAIN_DATA, allow_pickle=True)
-    test_data = np.load(TEST_DATA, allow_pickle=True)
-    trainX, trainY = train_data['arr_0'], train_data['arr_1']
-    testX, testY = test_data['arr_0'], test_data['arr_1']
-    print('Train data shape:', trainX.shape, trainY.shape)
-    print('Test data shape:', testX.shape, testY.shape)
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    
+    model = InceptionResnetV1(pretrained='vggface2').eval()
+    print("Model loaded.")
 
-    # Load model
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    model = InceptionResnetV1(pretrained='vggface2').eval().to(device)
-    print('Model loaded successfully.')
+    # for person in labels_map.keys():
+    #     class_dir = os.path.join(DATA_DIR, person)
+    #     embeddings = []
 
-    # Get embeddings for training set
-    newTrainX = np.array([get_embeddings(model, face, device) for face in trainX])
-    print('Train embeddings shape:', newTrainX.shape)
+    #     for file_name in os.listdir(class_dir):
+    #         if not file_name.lower().endswith(('.jpg', '.jpeg', '.png')):
+    #             continue
+    #         file_path = os.path.join(class_dir, file_name)
+    #         img = cv2.imread(file_path)
+    #         if img is None:
+    #             continue
+    #         img = cv2.resize(img, (160, 160))
+    #         embedding = get_embeddings(model, img)
+    #         embeddings.append(embedding)
 
-    # Get embeddings for test set
-    newTestX = np.array([get_embeddings(model, face, device) for face in testX])
-    print('Test embeddings shape:', newTestX.shape)
+    #     if len(embeddings) == 0:
+    #         print(f"No embeddings found for {person}")
+    #         continue
 
-    # Save compressed embeddings
-    np.savez_compressed('./preprocessed_data/train_embeddings.npz', newTrainX, trainY)
-    np.savez_compressed('./preprocessed_data/test_embeddings.npz', newTestX, testY)
+    #     embeddings = np.array(embeddings)
+    #     mean_embedding = np.mean(embeddings, axis=0)
+    #     output_path = os.path.join(OUTPUT_DIR, f'{person}_embedding.npz')
+    #     np.savez_compressed(output_path, mean_embedding)
+    #     print(f'Saved mean embedding for {person} to {output_path}')
+    
+    test_image_path = os.path.join(DATA_DIR, './test/frame_1/face_1.jpg')
+    img = cv2.imread(test_image_path)
+    if img is None:
+        print(f"Could not read image: {test_image_path}")
+    else:
+        img = cv2.resize(img, (160, 160))
+        embedding = get_embeddings(model, img)
+        output_path = './test_embedding.npz'
+        np.savez_compressed(output_path, embedding)
+        print(f'Saved test embedding to {output_path}')
