@@ -9,14 +9,14 @@ from detection.src.detector import Detector
 # detected_result = detector.detect_objects(cv2.imread(img_path))
 # print(detected_result)
 
-cap = cv2.VideoCapture('./test.mkv')
+cap = cv2.VideoCapture('./Data/Kim_Oanh_test_video.mp4')
 frame_id = 0
 while True:
     ret, frame = cap.read()
 
     if not ret:
         break
-    cv2.imwrite(f'./database_3/frame_{frame_id+1}.jpg', frame)
+    cv2.imwrite(f'./test/frame_{frame_id+1}.jpg', frame)
     frame_id+=1
     
     cv2.imshow("camera", frame)
