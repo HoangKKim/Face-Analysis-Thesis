@@ -7,7 +7,8 @@ SCALES = [1]
 DEVICE = 0
 
 # confidence threshold
-CONF_THRES = 0.7
+BODY_CONF_THRES = 0.5
+FACE_CONF_THRES = 0.7
 
 # NMS IoU threshold
 IOU_THRES = 0.5

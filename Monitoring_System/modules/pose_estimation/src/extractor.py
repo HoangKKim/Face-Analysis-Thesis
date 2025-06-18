@@ -75,7 +75,7 @@ class Keypoint_Extractor:
         """
         batch_results = inference_topdown(self.model, img)
         # return a list of keypoints per human in each image
-        print(batch_results)
+        # print(batch_results)
         return batch_results[0].pred_instances.keypoints
     
     def add_neck_keypoints(self, keypoints):
