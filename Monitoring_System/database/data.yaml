@@ -1,0 +1,4 @@
+# name of image folder
+folder_name: ['database_1', 'database_2', 'database_3']
+# corresponding label of it
+label: ['Kim', 'Oanh', 'Minh']

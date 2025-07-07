@@ -16,6 +16,7 @@ class Inference():
         self.class_names = CLASS_NAMES
         self.model = self._load_model(model_path)
         self.scaler = self._load_scaler(scaler_path)
+        self.keypoint_extractor = Keypoint_Extractor()
     
     def _load_model(self, ckpt_path):
         model = BehaviorClassifier(input_size= 26, num_classes= NUM_CLASSES)
@@ -35,7 +36,7 @@ class Inference():
 
         return scaler
 
-    def extract_feature(self, keypoint_extractor: Keypoint_Extractor, img_path):
+    def extract_feature(self, img_path):
         # read image
         if (type(img_path) == str):
             img = cv2.imread(img_path)
@@ -44,8 +45,8 @@ class Inference():
             img = img_path
         
         # init Pose Estimator
-        keypoints = keypoint_extractor.inference(img_path)
-        uppon_keypoints = keypoint_extractor.gather_upon_body(keypoints)
+        keypoints = self.keypoint_extractor.inference(img_path)
+        uppon_keypoints = self.keypoint_extractor.gather_upon_body(keypoints)
 
         # init Feature Extractor
         feature_extractor = Feature_Extractor(uppon_keypoints, img)
@@ -56,8 +57,8 @@ class Inference():
         features = np.array(image_feature).reshape(1, -1)
         return self.scaler.transform(features)
     
-    def predict(self, keypoint_extractor: Keypoint_Extractor, img_path):
-        image_feature = self.extract_feature(keypoint_extractor, img_path)
+    def predict(self, img_path):
+        image_feature = self.extract_feature(img_path)
         if image_feature is None:
             raise ValueError('Feature extraction failed')
         

@@ -55,9 +55,11 @@ class Detector:
 
         return self.img_path, img, img0
 
-    def detect_objects(self, frame):
+    def detect_objects(self, frame, body_conf_thres = BODY_CONF_THRES, face_conf_thres = FACE_CONF_THRES):
         """get both face and body"""
         detected_objects = []
+        self.body_conf_thres = body_conf_thres
+        self.face_conf_thres = face_conf_thres
         with open(self.data) as f:
             data = yaml.safe_load(f)  # load data dict
 
@@ -131,7 +133,11 @@ class Detector:
 
         return detected_objects
     
-    def detect_face(self, frame):
+    def detect_face(self, frame, body_conf_thres = 0.5, face_conf_thres = 0.7):
+        self.body_conf_thres = body_conf_thres
+        self.face_conf_thres = face_conf_thres
+
+        
         # get only face information 
         detected_objects = []
         with open(self.data) as f:

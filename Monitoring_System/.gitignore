@@ -8,8 +8,11 @@ __pycache__/
 
 dlib/
 input/
-output/
-database/
+output/output_tracking
+output/exceptionss
+database/image
+
+*.mp4 
 
 # Distribution / packaging
 .Python
@@ -109,5 +112,6 @@ dmypy.json
 *.log
 *.tmp
 
-# weightweight
+# weight
 *.pth
+*.dat
