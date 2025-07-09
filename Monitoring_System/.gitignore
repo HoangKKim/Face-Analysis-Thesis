@@ -9,10 +9,11 @@ __pycache__/
 dlib/
 input/
 output/output_tracking
-output/exceptionss
+output/exceptions
 database/image
 
 *.mp4 
+*.jpg
 
 # Distribution / packaging
 .Python

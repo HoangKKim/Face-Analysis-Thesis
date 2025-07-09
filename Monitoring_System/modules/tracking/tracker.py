@@ -37,6 +37,7 @@ class Tracker:
         self.class_id = class_id
         self.person_id_map = {}
         self.next_person_id = 0
+        self.detector = Detector()
 
     def is_the_same_person(self, bbox_face, bbox_body, iou_thres=0.1):
         # Kiểm tra nếu bbox_face nằm trong bbox_body
@@ -62,11 +63,11 @@ class Tracker:
         iou = interArea / float(faceArea + bodyArea - interArea)
         return iou >= iou_thres
 
-    def track_objects(self, frame, detector: Detector, frame_id):
+    def track_objects(self, frame, frame_id):
         tracked_objects = []
 
         # Step 1: Detect objects
-        detected_results = detector.detect_objects(frame)
+        detected_results = self.detector.detect_objects(frame)
 
         # Step 2: Prepare detections for DeepSORT
         detection = []

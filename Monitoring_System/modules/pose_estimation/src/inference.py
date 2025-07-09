@@ -69,7 +69,7 @@ class Inference():
             output = self.model(input_tensor)
             predict_index = torch.argmax(output, dim = 1).item()
         predict_label = self.class_names[predict_index]
-        print(f"[INFO] Predicted behavior: {predict_label}")
+        # print(f"[INFO] Predicted behavior: {predict_label}")
         return predict_label
     
 if __name__ == '__main__':

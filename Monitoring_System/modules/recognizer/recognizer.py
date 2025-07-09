@@ -66,8 +66,12 @@ class FaceRecognizer:
                        for f in os.listdir(input_folder)
                        if f.lower().endswith(('.jpg', '.png', '.jpeg'))]
         
-        num_of_samples = int(0.1* len(face_images))
-        sampled_images = random.sample(face_images, num_of_samples)
+        num_of_samples = int(0.1 * len(face_images))
+        if num_of_samples <= 0: 
+            sampled_images = face_images
+        else:
+            sampled_images = random.sample(face_images, num_of_samples)
+
         vectors = [self.get_embeddings(cv2.imread(image_path)) for image_path in sampled_images]
         mean_vector = np.mean(np.array(vectors), axis=0)
         return mean_vector

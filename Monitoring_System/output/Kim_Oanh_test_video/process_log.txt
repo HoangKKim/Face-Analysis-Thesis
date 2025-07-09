@@ -1,0 +1,40 @@
+[2025-07-09 17:07:34] [INFO] Create output\Kim_Oanh_test_video successfully
+[2025-07-09 17:07:36] [INFO] Starting to process video
+[2025-07-09 17:15:35] [INFO] Tracking done, results saved.
+[2025-07-09 17:15:35] [INFO] Move to Recognition
+[2025-07-09 17:15:36] [INFO] Recognized successfully and rename the coressponding folder!
+[2025-07-09 17:15:36] [INFO] Folder output\Kim_Oanh_test_video\recognition\person_00 is belonged to Oanh - score: 0.8619570732116699
+[2025-07-09 17:15:36] [INFO] Existed directory: ['output\\Kim_Oanh_test_video\\recognition\\Oanh']
+[2025-07-09 17:15:36] [INFO] Recognized successfully and rename the coressponding folder!
+[2025-07-09 17:15:36] [INFO] Folder output\Kim_Oanh_test_video\recognition\person_01 is belonged to Kim - score: 0.8753538131713867
+[2025-07-09 17:15:36] [INFO] Existed directory: ['output\\Kim_Oanh_test_video\\recognition\\Oanh', 'output\\Kim_Oanh_test_video\\recognition\\Kim']
+[2025-07-09 17:15:36] [INFO] Predicting emotions and behaviours
+[2025-07-09 17:15:36] [INFO] Processing Kim
+[2025-07-09 17:15:58] [INFO] Processing Oanh
+[2025-07-09 17:16:22] [INFO] Analyzing emotion & behavior
+[2025-07-09 17:16:22] [INFO] Loaded report: output\Kim_Oanh_test_video\output_pose\Kim.json
+[2025-07-09 17:16:22] [INFO] Extract info completed.
+[2025-07-09 17:16:22] [INFO] Saved emotion curve at output\Kim_Oanh_test_video\figure\Kim\emotion_curve.png
+[2025-07-09 17:16:22] [INFO] Saved behavior curve at output\Kim_Oanh_test_video\figure\Kim\behavior_curve.png
+[2025-07-09 17:16:23] [INFO] Saved fusion curve at output\Kim_Oanh_test_video\figure\Kim\fusion_curve.png
+[2025-07-09 17:16:23] [INFO] Saved 3-curve figure to output\Kim_Oanh_test_video\figure\Kim\concentration_curve.png
+[2025-07-09 17:16:23] [INFO] Ratio of positive: 22.56%
+[2025-07-09 17:16:23] [INFO] Ratio of neutral : 0.00%
+[2025-07-09 17:16:23] [INFO] Ratio of negative: 77.44%
+[2025-07-09 17:16:23] [INFO] Mean: -0.549
+[2025-07-09 17:16:23] [INFO] Std: 0.836
+[2025-07-09 17:16:23] [INFO] Focus score: -0.800
+[2025-07-09 17:16:23] [INFO] Normalized score: 0.10
+[2025-07-09 17:16:23] [INFO] Loaded report: output\Kim_Oanh_test_video\output_pose\Oanh.json
+[2025-07-09 17:16:23] [INFO] Extract info completed.
+[2025-07-09 17:16:23] [INFO] Saved emotion curve at output\Kim_Oanh_test_video\figure\Oanh\emotion_curve.png
+[2025-07-09 17:16:23] [INFO] Saved behavior curve at output\Kim_Oanh_test_video\figure\Oanh\behavior_curve.png
+[2025-07-09 17:16:23] [INFO] Saved fusion curve at output\Kim_Oanh_test_video\figure\Oanh\fusion_curve.png
+[2025-07-09 17:16:24] [INFO] Saved 3-curve figure to output\Kim_Oanh_test_video\figure\Oanh\concentration_curve.png
+[2025-07-09 17:16:24] [INFO] Ratio of positive: 84.76%
+[2025-07-09 17:16:24] [INFO] Ratio of neutral : 0.00%
+[2025-07-09 17:16:24] [INFO] Ratio of negative: 15.24%
+[2025-07-09 17:16:24] [INFO] Mean: 0.695
+[2025-07-09 17:16:24] [INFO] Std: 0.719
+[2025-07-09 17:16:24] [INFO] Focus score: 0.479
+[2025-07-09 17:16:24] [INFO] Normalized score: 0.74
