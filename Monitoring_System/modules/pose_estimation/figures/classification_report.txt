@@ -1,13 +1,11 @@
                  precision    recall  f1-score   support
 
-Looking_Forward       0.94      0.97      0.95        76
-   Raising_Hand       1.00      1.00      1.00        66
-        Reading       0.91      0.98      0.94        50
-       Sleeping       1.00      0.94      0.97        47
- Turning_Around       1.00      0.93      0.96        59
+Looking_Forward       0.86      1.00      0.93       131
+   Raising_Hand       1.00      1.00      1.00       131
+        Reading       0.96      0.84      0.90       103
+       Sleeping       1.00      0.96      0.98       106
+ Turning_Around       1.00      0.96      0.98       123
 
-       accuracy                           0.97       298
-      macro avg       0.97      0.96      0.97       298
-   weighted avg       0.97      0.97      0.97       298
-
-Test Accuracy: 96.64%
+       accuracy                           0.96       594
+      macro avg       0.96      0.95      0.96       594
+   weighted avg       0.96      0.96      0.96       594

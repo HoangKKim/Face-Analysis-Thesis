@@ -1,0 +1,107 @@
+[2025-08-11 22:04:41] [INFO] Create output\backup_demo_fps60 successfully
+[2025-08-11 22:04:45] [INFO] Predicting emotions and behaviours
+[2025-08-11 22:04:45] [INFO] Processing Student_01
+[2025-08-11 22:10:57] [INFO] Loaded report: output\backup_demo_fps60\students_result\Student_01\concentration.json
+[2025-08-11 22:10:57] [INFO] Extract info completed.
+[2025-08-11 22:10:57] [INFO] Saved morde behavio/emotion summary to output\backup_demo_fps60\students_result\Student_01\concentration_mode_summary.json
+[2025-08-11 22:10:57] [INFO] Ratio of positive: 30.55%
+[2025-08-11 22:10:57] [INFO] Ratio of neutral : 22.91%
+[2025-08-11 22:10:57] [INFO] Ratio of negative: 46.55%
+[2025-08-11 22:10:57] [INFO] Mean: -0.160
+[2025-08-11 22:10:57] [INFO] Std: 0.863
+[2025-08-11 22:10:57] [INFO] Focus score: -0.160
+[2025-08-11 22:10:57] [INFO] Saved emotion curve at output\backup_demo_fps60\students_result\Student_01\figure\emotion_curve.png
+[2025-08-11 22:10:57] [INFO] Saved behavior curve at output\backup_demo_fps60\students_result\Student_01\figure\behavior_curve.png
+[2025-08-11 22:10:57] [INFO] Saved concentration curve at output\backup_demo_fps60\students_result\Student_01\figure\concentration_curve.png
+[2025-08-11 22:10:58] [INFO] Processing Student_02
+[2025-08-11 22:16:53] [INFO] Loaded report: output\backup_demo_fps60\students_result\Student_02\concentration.json
+[2025-08-11 22:16:53] [INFO] Extract info completed.
+[2025-08-11 22:16:53] [INFO] Saved morde behavio/emotion summary to output\backup_demo_fps60\students_result\Student_02\concentration_mode_summary.json
+[2025-08-11 22:16:53] [INFO] Ratio of positive: 24.22%
+[2025-08-11 22:16:53] [INFO] Ratio of neutral : 14.45%
+[2025-08-11 22:16:53] [INFO] Ratio of negative: 61.33%
+[2025-08-11 22:16:53] [INFO] Mean: -0.371
+[2025-08-11 22:16:53] [INFO] Std: 0.847
+[2025-08-11 22:16:53] [INFO] Focus score: -0.371
+[2025-08-11 22:16:54] [INFO] Saved emotion curve at output\backup_demo_fps60\students_result\Student_02\figure\emotion_curve.png
+[2025-08-11 22:16:54] [INFO] Saved behavior curve at output\backup_demo_fps60\students_result\Student_02\figure\behavior_curve.png
+[2025-08-11 22:16:54] [INFO] Saved concentration curve at output\backup_demo_fps60\students_result\Student_02\figure\concentration_curve.png
+[2025-08-11 22:16:54] [INFO] Processing Student_03
+[2025-08-11 22:22:27] [INFO] Loaded report: output\backup_demo_fps60\students_result\Student_03\concentration.json
+[2025-08-11 22:22:27] [INFO] Extract info completed.
+[2025-08-11 22:22:27] [INFO] Saved morde behavio/emotion summary to output\backup_demo_fps60\students_result\Student_03\concentration_mode_summary.json
+[2025-08-11 22:22:27] [INFO] Ratio of positive: 66.53%
+[2025-08-11 22:22:27] [INFO] Ratio of neutral : 4.38%
+[2025-08-11 22:22:27] [INFO] Ratio of negative: 29.08%
+[2025-08-11 22:22:27] [INFO] Mean: 0.375
+[2025-08-11 22:22:27] [INFO] Std: 0.903
+[2025-08-11 22:22:27] [INFO] Focus score: 0.375
+[2025-08-11 22:22:27] [INFO] Saved emotion curve at output\backup_demo_fps60\students_result\Student_03\figure\emotion_curve.png
+[2025-08-11 22:22:28] [INFO] Saved behavior curve at output\backup_demo_fps60\students_result\Student_03\figure\behavior_curve.png
+[2025-08-11 22:22:28] [INFO] Saved concentration curve at output\backup_demo_fps60\students_result\Student_03\figure\concentration_curve.png
+[2025-08-11 22:22:28] [INFO] Processing Student_04
+[2025-08-11 22:28:24] [INFO] Loaded report: output\backup_demo_fps60\students_result\Student_04\concentration.json
+[2025-08-11 22:28:24] [INFO] Extract info completed.
+[2025-08-11 22:28:24] [INFO] Saved morde behavio/emotion summary to output\backup_demo_fps60\students_result\Student_04\concentration_mode_summary.json
+[2025-08-11 22:28:24] [INFO] Ratio of positive: 25.48%
+[2025-08-11 22:28:24] [INFO] Ratio of neutral : 45.95%
+[2025-08-11 22:28:24] [INFO] Ratio of negative: 28.57%
+[2025-08-11 22:28:24] [INFO] Mean: -0.031
+[2025-08-11 22:28:24] [INFO] Std: 0.735
+[2025-08-11 22:28:24] [INFO] Focus score: -0.031
+[2025-08-11 22:28:24] [INFO] Saved emotion curve at output\backup_demo_fps60\students_result\Student_04\figure\emotion_curve.png
+[2025-08-11 22:28:24] [INFO] Saved behavior curve at output\backup_demo_fps60\students_result\Student_04\figure\behavior_curve.png
+[2025-08-11 22:28:24] [INFO] Saved concentration curve at output\backup_demo_fps60\students_result\Student_04\figure\concentration_curve.png
+[2025-08-11 22:28:25] [INFO] Processing Student_05
+[2025-08-11 22:34:50] [INFO] Loaded report: output\backup_demo_fps60\students_result\Student_05\concentration.json
+[2025-08-11 22:34:50] [INFO] Extract info completed.
+[2025-08-11 22:34:50] [INFO] Saved morde behavio/emotion summary to output\backup_demo_fps60\students_result\Student_05\concentration_mode_summary.json
+[2025-08-11 22:34:50] [INFO] Ratio of positive: 57.30%
+[2025-08-11 22:34:50] [INFO] Ratio of neutral : 5.11%
+[2025-08-11 22:34:50] [INFO] Ratio of negative: 37.59%
+[2025-08-11 22:34:50] [INFO] Mean: 0.197
+[2025-08-11 22:34:50] [INFO] Std: 0.954
+[2025-08-11 22:34:50] [INFO] Focus score: 0.197
+[2025-08-11 22:34:50] [INFO] Saved emotion curve at output\backup_demo_fps60\students_result\Student_05\figure\emotion_curve.png
+[2025-08-11 22:34:50] [INFO] Saved behavior curve at output\backup_demo_fps60\students_result\Student_05\figure\behavior_curve.png
+[2025-08-11 22:34:51] [INFO] Saved concentration curve at output\backup_demo_fps60\students_result\Student_05\figure\concentration_curve.png
+[2025-08-11 22:34:51] [INFO] Processing Student_06
+[2025-08-11 22:40:31] [INFO] Loaded report: output\backup_demo_fps60\students_result\Student_06\concentration.json
+[2025-08-11 22:40:31] [INFO] Extract info completed.
+[2025-08-11 22:40:31] [INFO] Saved morde behavio/emotion summary to output\backup_demo_fps60\students_result\Student_06\concentration_mode_summary.json
+[2025-08-11 22:40:31] [INFO] Ratio of positive: 19.17%
+[2025-08-11 22:40:31] [INFO] Ratio of neutral : 5.83%
+[2025-08-11 22:40:31] [INFO] Ratio of negative: 75.00%
+[2025-08-11 22:40:31] [INFO] Mean: -0.558
+[2025-08-11 22:40:31] [INFO] Std: 0.794
+[2025-08-11 22:40:31] [INFO] Focus score: -0.558
+[2025-08-11 22:40:31] [INFO] Saved emotion curve at output\backup_demo_fps60\students_result\Student_06\figure\emotion_curve.png
+[2025-08-11 22:40:31] [INFO] Saved behavior curve at output\backup_demo_fps60\students_result\Student_06\figure\behavior_curve.png
+[2025-08-11 22:40:32] [INFO] Saved concentration curve at output\backup_demo_fps60\students_result\Student_06\figure\concentration_curve.png
+[2025-08-11 22:40:32] [INFO] Processing Student_07
+[2025-08-11 22:47:43] [INFO] Loaded report: output\backup_demo_fps60\students_result\Student_07\concentration.json
+[2025-08-11 22:47:43] [INFO] Extract info completed.
+[2025-08-11 22:47:43] [INFO] Saved morde behavio/emotion summary to output\backup_demo_fps60\students_result\Student_07\concentration_mode_summary.json
+[2025-08-11 22:47:43] [INFO] Ratio of positive: 45.21%
+[2025-08-11 22:47:43] [INFO] Ratio of neutral : 7.88%
+[2025-08-11 22:47:43] [INFO] Ratio of negative: 46.92%
+[2025-08-11 22:47:43] [INFO] Mean: -0.017
+[2025-08-11 22:47:43] [INFO] Std: 0.960
+[2025-08-11 22:47:43] [INFO] Focus score: -0.017
+[2025-08-11 22:47:43] [INFO] Saved emotion curve at output\backup_demo_fps60\students_result\Student_07\figure\emotion_curve.png
+[2025-08-11 22:47:43] [INFO] Saved behavior curve at output\backup_demo_fps60\students_result\Student_07\figure\behavior_curve.png
+[2025-08-11 22:47:43] [INFO] Saved concentration curve at output\backup_demo_fps60\students_result\Student_07\figure\concentration_curve.png
+[2025-08-11 22:47:44] [INFO] Processing Student_08
+[2025-08-11 22:54:28] [INFO] Loaded report: output\backup_demo_fps60\students_result\Student_08\concentration.json
+[2025-08-11 22:54:28] [INFO] Extract info completed.
+[2025-08-11 22:54:28] [INFO] Saved morde behavio/emotion summary to output\backup_demo_fps60\students_result\Student_08\concentration_mode_summary.json
+[2025-08-11 22:54:28] [INFO] Ratio of positive: 56.29%
+[2025-08-11 22:54:28] [INFO] Ratio of neutral : 7.28%
+[2025-08-11 22:54:28] [INFO] Ratio of negative: 36.42%
+[2025-08-11 22:54:28] [INFO] Mean: 0.199
+[2025-08-11 22:54:28] [INFO] Std: 0.942
+[2025-08-11 22:54:28] [INFO] Focus score: 0.199
+[2025-08-11 22:54:28] [INFO] Saved emotion curve at output\backup_demo_fps60\students_result\Student_08\figure\emotion_curve.png
+[2025-08-11 22:54:28] [INFO] Saved behavior curve at output\backup_demo_fps60\students_result\Student_08\figure\behavior_curve.png
+[2025-08-11 22:54:29] [INFO] Saved concentration curve at output\backup_demo_fps60\students_result\Student_08\figure\concentration_curve.png
+[2025-08-11 22:54:32] [INFO] Outputing video

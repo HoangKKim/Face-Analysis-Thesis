@@ -362,11 +362,13 @@ class FERClassifier:
             outputs = self.model(image_tensor)
             probabilities = torch.softmax(outputs, dim=1)
             _, predicted = torch.max(outputs, 1)
-        
+            score, _ = torch.max(probabilities, 1)
+
         predicted_class = predicted.cpu().numpy()[0]
-        probs = probabilities.cpu().numpy()[0]
+        probs = score.cpu().numpy()[0]
         
         if return_probabilities:
+            # print(probs)
             return predicted_class, probs
         return predicted_class
     

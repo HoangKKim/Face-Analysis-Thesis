@@ -1,23 +1,24 @@
-from modules.detection.src.detector import Detector
+from modules.detection.src.detector import YOLO_Detector
 import yaml
 import torch
 from facenet_pytorch import InceptionResnetV1
 
+def load_yaml_config(path):
+    with open(path, "r") as f:
+        return yaml.safe_load(f)
+    
+# path of label map file
+LABEL_MAP_PATH = "database/data.yaml"
 
-# load file data
-with open("database/data.yaml", "r") as f:
-    config = yaml.safe_load(f)
+# Load label_map từ file yaml
+LABEL_MAP = load_yaml_config(LABEL_MAP_PATH)["label_map"]
 
-LANDMARK_MODEL_PATH = 'modules/recognizer/model/shape_predictor_68_face_landmarks.dat'
-
-DETECTOR = Detector()
+DETECTOR = YOLO_Detector()
 
 FEATURE_FILE = 'database/feature/feature_vectors.npy'
+LABEL_FILE = 'database/feature/labels.txt'
 
 DATABASE_ROOT_FOLDER = 'database/image'
-
-DATABASE_FOLDER_NAME = config['folder_name']
-LABEL = config['label']
 
 DEVICE = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 EMBEDDING_MODEL = InceptionResnetV1(pretrained='vggface2').eval().to(DEVICE)

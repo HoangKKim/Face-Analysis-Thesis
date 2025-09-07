@@ -1,0 +1,9 @@
+student_id,ratio_positive,ratio_neutral,ratio_negative,mean,std,focus_score,result
+Student_01,0.31,0.23,0.47,-0.16,0.86,-0.16,NEGATIVE
+Student_02,0.24,0.14,0.61,-0.37,0.85,-0.37,NEGATIVE
+Student_03,0.67,0.04,0.29,0.37,0.9,0.37,POSITIVE
+Student_04,0.25,0.46,0.29,-0.03,0.73,-0.03,NEUTRAL
+Student_05,0.57,0.05,0.38,0.2,0.95,0.2,POSITIVE
+Student_06,0.19,0.06,0.75,-0.56,0.79,-0.56,NEGATIVE
+Student_07,0.45,0.08,0.47,-0.02,0.96,-0.02,NEUTRAL
+Student_08,0.56,0.07,0.36,0.2,0.94,0.2,POSITIVE

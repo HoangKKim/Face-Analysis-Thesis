@@ -5,6 +5,7 @@ import cv2
 import os
 from glob import glob
 import json
+from tqdm import tqdm
 
 class Process_Dataset:
     def __init__(self):
@@ -61,25 +62,33 @@ class Process_Dataset:
         labels = []
 
         # load qua cac item trong folder
-        for item in label_data:
+        for item in tqdm(label_data, desc=f"Extracting from {os.path.basename(image_folder)}", unit="img"):
             image_label = int(item['label'])
             img_name = item['image']
             img_path = os.path.join(image_folder, img_name)
 
             # print(img_path)
             # read image
+            
             img = cv2.imread(img_path)
+            if img is None:
+                print(img_path)
+                continue
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         
             # init Pose Estimator
-            pose_estimator = Keypoint_Extractor()
-            keypoints = pose_estimator.inference(img_path)
-            uppon_keypoints = pose_estimator.gather_upon_body(keypoints)
+            # pose_estimator = Keypoint_Extractor()
+            keypoints = keypoint_extractor.inference(img_path)
+            uppon_keypoints = keypoint_extractor.gather_upon_body(keypoints)
 
             # init Feature Extractor
-            feature_extractor = Feature_Extractor(uppon_keypoints, img)
+            feature_extractor = Feature_Extractor(uppon_keypoints)
             image_feature = feature_extractor.extract_feature()
             
+            if image_feature is None:
+                print(f"Error in extract feature: {img_path}")
+                continue
+
             # add to list
             features.append(image_feature)
             labels.append(image_label)
@@ -93,13 +102,14 @@ if __name__ == '__main__':
     # process from original dataset
     folder = ['train', 'valid', 'test']
 
-    for i in folder:
-        origin_folder = os.path.join('./modules/pose_estimation/dataset/original_labels', i)
-        output_file = os.path.join('./modules/pose_estimation/dataset/labels', i + '.json')
-        labels = dataset_processor.gather_labels(origin_folder, output_file)
+    # for i in folder:
+    #     origin_folder = os.path.join('./modules/pose_estimation/dataset/original_labels', i)
+    #     output_file = os.path.join('./modules/pose_estimation/dataset/labels', i + '.json')
+    #     labels = dataset_processor.gather_labels(origin_folder, output_file)
 
     # extract features
     for i in folder:
+        print(f"Process for {folder}")
         image_folder = os.path.join('./modules/pose_estimation/dataset/images', i)
         label_file = os.path.join('./modules/pose_estimation/dataset/labels', i + '.json')
         features, labels = dataset_processor.extract_feature(image_folder, label_file)

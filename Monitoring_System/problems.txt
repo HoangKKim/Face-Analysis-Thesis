@@ -1,5 +1,0 @@
-Vấn đề: mô hình bị overfit trên tập dữ liệu quá -> đa dạng tập dữ liệu huấn luyện 
-
-dữ liệu mới
-
-https://universe.roboflow.com/fyp-8a7oh/student-behavior-analysis/browse/fork?queryText=&pageSize=50&startingIndex=0&browseQuery=true

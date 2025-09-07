@@ -1,0 +1,11 @@
+Link lưu trữ các file trọng số: https://www.kaggle.com/datasets/hoangkim14/model-for-thesis
+
+Trong đó: 
+- `best_checkpoints.pth` được đặt trong thư mục `src/modules/pose_estimation/checkpoints/`
+- `best_face.pt` được đặt trong `src/modules/detection/models
+- `yolo11n.pt` được đặt trong `src/modules/detection/models
+- `best_fer_model.pth` được đặt trong thư mục `src/modules/expression/models/`
+- `best_model.pth` được đặt tại `src/`
+- `feature_vectors.npy` được đặt tại `src/database/feature/`
+- `scaler.pkl` được đặt tại `src/modules/pose_estimation/scaler/`
+- `td-hm_hrnet-w32_8xb64-210e_coco-256x192-81c58e40_20220909.pth` được đặt tại `src/modules/pose_estimation/mmpose/ckpt/`

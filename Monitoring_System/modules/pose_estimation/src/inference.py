@@ -9,6 +9,7 @@ import cv2
 from modules.pose_estimation.src.model import BehaviorClassifier  
 from modules.pose_estimation.src.extractor import Keypoint_Extractor, Feature_Extractor
 from cfg.pose_cfg import *
+import torch.nn.functional as F  # thêm ở đầu file
 
 class Inference():
     def __init__(self, model_path=BEHAVIOR_CKPT_PATH, scaler_path=BEHAVIOR_SCALER_PATH, device=None):
@@ -19,7 +20,7 @@ class Inference():
         self.keypoint_extractor = Keypoint_Extractor()
     
     def _load_model(self, ckpt_path):
-        model = BehaviorClassifier(input_size= 26, num_classes= NUM_CLASSES)
+        model = BehaviorClassifier(input_size= 36, num_classes= NUM_CLASSES)
         check_point = torch.load(ckpt_path, map_location=self.device)
         model.load_state_dict(check_point['model_state_dict'])
         model.to(self.device)
@@ -49,7 +50,7 @@ class Inference():
         uppon_keypoints = self.keypoint_extractor.gather_upon_body(keypoints)
 
         # init Feature Extractor
-        feature_extractor = Feature_Extractor(uppon_keypoints, img)
+        feature_extractor = Feature_Extractor(uppon_keypoints)
         image_feature = feature_extractor.extract_feature()
         return image_feature
 
@@ -63,21 +64,26 @@ class Inference():
             raise ValueError('Feature extraction failed')
         
         image_feature = self.preprocess(image_feature)
-        input_tensor = torch.tensor(image_feature, dtype= torch.float32).to(self.device)
+        input_tensor = torch.tensor(image_feature, dtype=torch.float32).to(self.device)
 
         with torch.no_grad():
             output = self.model(input_tensor)
-            predict_index = torch.argmax(output, dim = 1).item()
+            probs = F.softmax(output, dim=1)  # chuẩn hóa đầu ra về xác suất
+            predict_index = torch.argmax(probs, dim=1).item()
+            confidence = probs[0][predict_index].item()  # xác suất tương ứng với nhãn dự đoán
+
         predict_label = self.class_names[predict_index]
-        # print(f"[INFO] Predicted behavior: {predict_label}")
-        return predict_label
+        # print(f"[INFO] Predicted behavior: {predict_label} ({confidence:.2f})")
+        # print(probs)
+
+        return predict_label, confidence
     
 if __name__ == '__main__':
     predictor = Inference()
     keypoint_extractor = Keypoint_Extractor()
 
     try:
-        behavior = predictor.predict(keypoint_extractor, 'input/sleeping.jpg')
+        behavior = predictor.predict('output/official_demo_1/recognition/Student_02/body/frame_14305.jpg')
         print(f"[RESULT] Behavior: {behavior}")
     except Exception as e:
         print(f'[ERROR] {e}')

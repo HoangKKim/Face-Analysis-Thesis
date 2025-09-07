@@ -1,0 +1,58 @@
+{
+  "Student_01": [
+    {"minute": 1, "Behavior": ["Looking_Forward"], "Emotion": ["Neutral"], "Final": "Neutral"},
+    {"minute": 2, "Behavior": ["Sleeping", "Turning_Around", "Looking_Forward"], "Emotion": ["Sad", "Neutral"], "Final": "Negative"},
+    {"minute": 3, "Behavior": ["Turning_Around", "Looking_Forward"], "Emotion": ["Fear", "Angry", "Neutral"], "Final": "Negative"},
+    {"minute": 4, "Behavior": ["Raising_Hand", "Reading", "Looking_Forward"], "Emotion": ["Surprised", "Neutral"], "Final": "Positive"},
+    {"minute": 5, "Behavior": ["Turning_Around", "Looking_Forward"], "Emotion": ["Angry", "Neutral"], "Final": "Negative"}
+  ],
+  "Student_02": [
+    {"minute": 1, "Behavior": ["Raising_Hand", "Reading", "Looking_Forward"], "Emotion": ["Surprised", "Neutral"], "Final": "Positive"},
+    {"minute": 2, "Behavior": ["Looking_Forward"], "Emotion": ["Angry", "Neutral"], "Final": "Neutral"},
+    {"minute": 3, "Behavior": ["Turning_Around", "Looking_Forward"], "Emotion": ["Happy", "Angry", "Neutral"], "Final": "Negative"},
+    {"minute": 4, "Behavior": ["Sleeping", "Looking_Forward"], "Emotion": ["Angry", "Neutral"], "Final": "Negative"},
+    {"minute": 5, "Behavior": ["Turning_Around", "Looking_Forward"], "Emotion": ["Happy", "Angry", "Sad", "Neutral"], "Final": "Negative"}
+  ],
+  "Student_03": [
+    {"minute": 1, "Behavior": ["Looking_Forward"], "Emotion": ["Neutral"], "Final": "Neutral"},
+    {"minute": 2, "Behavior": ["Reading", "Raising_Hand", "Looking_Forward"], "Emotion": ["Happy", "Neutral"], "Final": "Positive"},
+    {"minute": 3, "Behavior": ["Raising_Hand", "Reading", "Looking_Forward"], "Emotion": ["Surprise", "Neutral"], "Final": "Positive"},
+    {"minute": 4, "Behavior": ["Reading", "Raising_Hand", "Looking_Forward"], "Emotion": ["Happy", "Neutral"], "Final": "Positive"},
+    {"minute": 5, "Behavior": ["Sleeping", "Turning_Around", "Looking_Forward"], "Emotion": ["Sad", "Neutral"], "Final": "Negative"}
+  ],
+  "Student_04": [
+    {"minute": 1, "Behavior": ["Looking_Forward"], "Emotion": ["Neutral"], "Final": "Neutral"},
+    {"minute": 2, "Behavior": ["Looking_Forward"], "Emotion": ["Neutral"], "Final": "Neutral"},
+    {"minute": 3, "Behavior": ["Looking_Forward"], "Emotion": ["Neutral"], "Final": "Neutral"},
+    {"minute": 4, "Behavior": ["Reading", "Raising_Hand", "Looking_Forward"], "Emotion": ["Surprise", "Neutral"], "Final": "Positive"},
+    {"minute": 5, "Behavior": ["Sleeping", "Turning_Around", "Looking_Forward"], "Emotion": ["Sad", "Neutral"], "Final": "Negative"}
+  ],
+  "Student_05": [
+    {"minute": 1, "Behavior": ["Reading", "Raising_Hand", "Looking_Forward"], "Emotion": ["Neutral"], "Final": "Positive"},
+    {"minute": 2, "Behavior": ["Looking_Forward"], "Emotion": ["Neutral"], "Final": "Neutral"},
+    {"minute": 3, "Behavior": ["Raising_Hand", "Reading", "Looking_Forward"], "Emotion":     ["Neutral"], "Final": "Positive"},
+    {"minute": 4, "Behavior": ["Reading", "Raising_Hand", "Looking_Forward"], "Emotion": ["Neutral"], "Final": "Positive"},
+    {"minute": 5, "Behavior": ["Sleeping", "Turning_Around", "Looking_Forward"], "Emotion": ["Neutral"], "Final": "Negative"}
+  ],
+  "Student_06": [
+    {"minute": 1, "Behavior": ["Sleeping", "Turning_Around", "Looking_Forward"], "Emotion": ["Sad", "Neutral"], "Final": "Negative"},
+    {"minute": 2, "Behavior": ["Turning_Around", "Looking_Forward"], "Emotion": ["Neutral"], "Final": "Negative"},
+    {"minute": 3, "Behavior": ["Turning_Around", "Looking_Forward"], "Emotion": ["Sad", "Angry", "Neutral"], "Final": "Negative"},
+    {"minute": 4, "Behavior": ["Looking forward", "Looking_Forward"], "Emotion": ["Neutral"], "Final": "Neutral"},
+    {"minute": 5, "Behavior": ["Reading", "Raising_Hand", "Looking_Forward"], "Emotion": ["Happy", "Neutral"], "Final": "Positive"}
+  ],
+  "Student_07": [
+    {"minute": 1, "Behavior": ["Raising_Hand", "Reading", "Looking_Forward"], "Emotion": ["Happy", "Neutral"], "Final": "Positive"},
+    {"minute": 2, "Behavior": ["Reading", "Raising_Hand", "Looking_Forward"], "Emotion": ["Surprised", "Neutral"], "Final": "Positive"},
+    {"minute": 3, "Behavior": ["Raising_Hand", "Reading", "Looking_Forward"], "Emotion": ["Happy", "Neutral"], "Final": "Positive"},
+    {"minute": 4, "Behavior": ["Looking_Forward"], "Emotion": ["Neutral"], "Final": "Neutral"},
+    {"minute": 5, "Behavior": ["Turning_Around", "Sleeping", "Looking_Forward"], "Emotion": ["Sad", "Neutral"], "Final": "Negative"}
+  ],
+  "Student_08": [
+    {"minute": 1, "Behavior": ["Reading", "Raising_Hand", "Looking_Forward"], "Emotion": ["Happy", "Neutral"], "Final": "Positive"},
+    {"minute": 2, "Behavior": ["Reading", "Raising_Hand", "Looking_Forward"], "Emotion": ["Surprise", "Neutral"], "Final": "Positive"},
+    {"minute": 3, "Behavior": ["Looking forward", "Reading", "Looking_Forward"], "Emotion": ["Neutral"], "Final": "Positive"},
+    {"minute": 4, "Behavior": ["Raising_Hand", "Reading", "Looking_Forward"], "Emotion": ["Happy", "Neutral"], "Final": "Positive"},
+    {"minute": 5, "Behavior": ["Turning_Around", "Looking_Forward"], "Emotion": ["Sad", "Neutral"], "Final": "Negative"}
+  ]
+}

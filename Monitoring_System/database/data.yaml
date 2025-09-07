@@ -1,4 +1,9 @@
-# name of image folder
-folder_name: ['database_1', 'database_2', 'database_3']
-# corresponding label of it
-label: ['Kim', 'Oanh', 'Minh']
+label_map:
+  BuiMinh: Student_01
+  Kim: Student_02
+  MinhTrieu: Student_03
+  Ngoc: Student_04
+  Oanh: Student_05
+  Tam: Student_06
+  Thinh: Student_07
+  Tran: Student_08

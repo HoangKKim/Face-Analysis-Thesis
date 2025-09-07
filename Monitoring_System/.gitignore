@@ -11,9 +11,12 @@ input/
 output/output_tracking
 output/exceptions
 database/image
+modules/pose_estimation/dataset
 
 *.mp4 
 *.jpg
+
+*.pth
 
 # Distribution / packaging
 .Python
@@ -112,7 +115,7 @@ dmypy.json
 *.sqlite
 *.log
 *.tmp
+*.npy
 
 # weight
-*.pth
-*.dat
+modules/pose_estimation/mmpose/ckpt/td-hm_hrnet-w32_8xb64-210e_coco-256x192-81c58e40_20220909.pth

@@ -43,6 +43,7 @@ def plot_confusion_matrix(y_true, y_pred, class_names = None, save_path = './mod
 def plot_metrics_report(y_true, y_pred, class_names, save_path='./modules/pose_estimation/figures/classification_metrics_bar.png'):
     from sklearn.metrics import precision_recall_fscore_support
     import numpy as np
+    import matplotlib.pyplot as plt
 
     precision, recall, f1, _ = precision_recall_fscore_support(y_true, y_pred, zero_division=0)
 
@@ -50,9 +51,9 @@ def plot_metrics_report(y_true, y_pred, class_names, save_path='./modules/pose_e
     width = 0.25
 
     plt.figure(figsize=(10, 6))
-    plt.bar(x - width, precision, width, label='Precision')
-    plt.bar(x, recall, width, label='Recall')
-    plt.bar(x + width, f1, width, label='F1-Score')
+    bars1 = plt.bar(x - width, precision, width, label='Precision')
+    bars2 = plt.bar(x, recall, width, label='Recall')
+    bars3 = plt.bar(x + width, f1, width, label='F1-Score')
 
     plt.xlabel('Class')
     plt.ylabel('Score')
@@ -60,6 +61,18 @@ def plot_metrics_report(y_true, y_pred, class_names, save_path='./modules/pose_e
     plt.xticks(x, class_names, rotation=45, ha='right')
     plt.ylim(0, 1.1)
     plt.legend()
+
+    # Thêm text lên từng bar
+    def add_labels(bars):
+        for bar in bars:
+            height = bar.get_height()
+            plt.text(bar.get_x() + bar.get_width()/2, height + 0.02,  # vị trí text ngay trên bar
+                     f'{height:.2f}', ha='center', va='bottom', fontsize=9)
+
+    add_labels(bars1)
+    add_labels(bars2)
+    add_labels(bars3)
+
     plt.tight_layout()
     plt.savefig(save_path)
     plt.close()
